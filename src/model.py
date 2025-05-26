@@ -106,7 +106,7 @@ class Locker:
             "compartments": {key.value: value for key, value in self.compartments.items()},
         }
 
-@dataclass
+@dataclass(frozen=True)
 class Parcel:
     """
         Represents a physical parcel with dimensions and weight.
@@ -115,6 +115,35 @@ class Parcel:
     height: int
     length: int
     weight: int
+
+    @staticmethod
+    def get_size(height: int, length: int) -> CompartmentsLarge:
+        """
+           Determines the parcel size category based on its dimensions.
+
+           This method evaluates the given `height` and `length` of a parcel
+           and returns the corresponding size category based on predefined thresholds.
+
+           Size categories:
+               - SMALL: height ≤ 20 cm and length ≤ 40 cm
+               - MEDIUM: height ≤ 30 cm and length ≤ 50 cm
+               - LARGE: any parcel exceeding the above dimensions
+
+           Args:
+               height (int): The height of the parcel in centimeters.
+               length (int): The length of the parcel in centimeters.
+
+           Returns:
+               CompartmentsLarge: The size category enum value (`SMALL`, `MEDIUM`, or `LARGE`).
+
+           """
+
+        if height <= 20 and length <= 40:
+            return CompartmentsLarge.SMALL
+        elif height <= 30 and length <= 50:
+            return CompartmentsLarge.MEDIUM
+        else:
+            return CompartmentsLarge.LARGE
 
     def to_dict(self) -> ParcelsDataDict:
         """

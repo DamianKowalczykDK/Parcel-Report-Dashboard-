@@ -5,6 +5,7 @@ name = "pypi"
 
 [packages]
 email-validator = "*"
+requests = "*"
 
 [dev-packages]
 mypy = "*"
@@ -18,5 +19,5 @@ python_full_version = "3.13.2"
 
 [scripts]
 check = "pyright"
-check2 = "mypy src test main.py"
+check2 = "mypy src tests main.py"
 test = "pytest --cov=src --cov-report=html"

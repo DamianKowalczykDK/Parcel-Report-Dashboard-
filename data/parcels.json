@@ -10,5 +10,11 @@
     "height": 20,
     "length": 40,
     "weight": 3
+  },
+  {
+    "parcel_id": "C12345",
+    "height": 20,
+    "length": 35,
+    "weight": 1
   }
 ]

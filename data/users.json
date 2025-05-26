@@ -1,6 +1,6 @@
 [
   {
-    "email": "john.doe@example.com",
+    "email": "john.doe@gmail.com",
     "name": "John",
     "surname": "Doe",
     "city": "New York",
@@ -8,7 +8,7 @@
     "longitude": -74.005974
   },
   {
-    "email": "jane.smith@example.com",
+    "email": "jane.smith@gmail.com",
     "name": "Jane",
     "surname": "Smith",
     "city": "Los Angeles",
@@ -16,7 +16,7 @@
     "longitude": -118.243683
   },
   {
-    "email": "alice.smith@example.com",
+    "email": "alice.smith@gmail.com",
     "name": "Alice",
     "surname": "Smith",
     "city": "Chicago",
@@ -24,7 +24,7 @@
     "longitude": -87.629799
   },
   {
-    "email": "bob.jones@example.com",
+    "email": "bob.jones@gmail.com",
     "name": "Bob",
     "surname": "Jones",
     "city": "San Francisco",

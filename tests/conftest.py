@@ -1,12 +1,19 @@
 from unittest.mock import MagicMock
 import pytest
-from src.model import User, Deliver, Locker, Parcel, UsersDataDict, CompartmentsLarge, LockersDataDict, ParcelsDataDict, \
+from src.model import (
+    User,
+    Deliver,
+    Locker,
+    Parcel,
+    UsersDataDict,
+    CompartmentsLarge,
+    LockersDataDict,
+    ParcelsDataDict,
     DeliversDataDict
-
+)
 
 def fake_user() -> MagicMock:
     return MagicMock(spec=User)
-
 
 @pytest.fixture
 def user_1() -> User:
@@ -38,7 +45,8 @@ def user_2() -> User:
         surname="Smith",
         city="Los Angeles",
         latitude=34.052235,
-        longitude=-118.243683)
+        longitude=-118.243683
+    )
 
 @pytest.fixture
 def user_2_data() -> UsersDataDict:
@@ -132,8 +140,8 @@ def deliver_1() -> Deliver:
     return Deliver(
         parcel_id="P12345",
         locker_id="L001",
-        sender_email="alice.smith@example.com",
-        receiver_email="john.doe@example.com",
+        sender_email="john.doe@example.com",
+        receiver_email="jane.smith@example.com",
         sent_date="2023-12-01",
         expected_delivery_date="2023-12-05"
     )
@@ -143,8 +151,8 @@ def deliver_1_data() -> DeliversDataDict:
     return {
         "parcel_id": "P12345",
         "locker_id": "L001",
-        "sender_email": "alice.smith@example.com",
-        "receiver_email": "john.doe@example.com",
+        "sender_email": "john.doe@example.com",
+        "receiver_email": "jane.smith@example.com",
         "sent_date": "2023-12-01",
         "expected_delivery_date": "2023-12-05"
     }
@@ -154,8 +162,8 @@ def deliver_2() -> Deliver:
     return Deliver(
         parcel_id="P67890",
         locker_id="L002",
-        sender_email="bob.jones@example.com",
-        receiver_email="jane.smith@example.com",
+        sender_email="jane.smith@example.com",
+        receiver_email="john.doe@example.com",
         sent_date="2023-12-02",
         expected_delivery_date="2023-12-06"
     )
@@ -165,8 +173,8 @@ def deliver_2_data() -> DeliversDataDict:
     return {
         "parcel_id": "P67890",
         "locker_id": "L002",
-        "sender_email": "bob.jones@example.com",
-        "receiver_email": "jane.smith@example.com",
+        "sender_email": "jane.smith@example.com",
+        "receiver_email": "john.doe@example.com",
         "sent_date": "2023-12-02",
         "expected_delivery_date": "2023-12-06"
     }

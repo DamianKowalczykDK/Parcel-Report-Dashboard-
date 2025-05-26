@@ -7,8 +7,7 @@ from src.validator import (
 )
 from src.model import UsersDataDict, LockersDataDict, ParcelsDataDict, User, DeliversDataDict
 import pytest
-
-from test.conftest import fake_user
+from tests.conftest import fake_user
 
 
 @pytest.mark.parametrize("value, expected", [
@@ -176,5 +175,6 @@ def test_deliver_data_dict_validator_sender_email(data: DeliversDataDict, expect
 def test_deliver_data_dict_validator_sent_date_and_expected_delivery_date(
         data: DeliversDataDict,
         expected: bool) -> None:
+
     validate = DeliversDataDictValidator()
     assert validate.validate(data) == expected

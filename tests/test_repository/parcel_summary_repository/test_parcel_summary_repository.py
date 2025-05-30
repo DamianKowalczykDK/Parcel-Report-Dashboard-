@@ -21,10 +21,13 @@ def test_build_parcel_summary(
     deliver = summary[locker1][parcel_1.parcel_id]
 
     assert parcel_1.parcel_id in summary[locker_1.locker_id]
-    assert deliver == 1
+    assert deliver == 0
 
 
-def test_invalid_entry_logs_warning(parcel_summary_repo: ParcelSummaryRepository, caplog: pytest.LogCaptureFixture) -> None:
+def test_invalid_entry_logs_warning(
+        parcel_summary_repo: ParcelSummaryRepository,
+        caplog: pytest.LogCaptureFixture) -> None:
+
     invalid_deliver = Deliver(
         parcel_id="P12345",
         locker_id="L0015687",

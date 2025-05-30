@@ -70,7 +70,7 @@ class ParcelSummaryRepository[U, L, P, D]:
     locker_repo: DataRepository[L, Locker]
     parcel_repo: DataRepository[P,Parcel]
     delivery_repo: DataRepository[D,Deliver]
-    _parcel_summary: dict[Any, Any] = field(default_factory=dict, init=False)
+    _parcel_summary: dict[str, dict[str, int]] = field(default_factory=dict, init=False)
 
     def parcel(self, force_refresh: bool = False) -> dict[Any, Any]:
         if force_refresh or not self._parcel_summary:
@@ -78,7 +78,7 @@ class ParcelSummaryRepository[U, L, P, D]:
             self._parcel_summary = self._build_parcel()
         return self._parcel_summary
 
-    def _build_parcel(self) -> dict[Any, Any]:
+    def _build_parcel(self) -> dict[str, dict[str, int]]:
         parcel_summary: dict[str, dict[str, int]] = defaultdict(lambda: defaultdict(int))
 
         users = {user.email: user for user in self.user_repo.get_data()}
@@ -93,7 +93,7 @@ class ParcelSummaryRepository[U, L, P, D]:
             receiver = users.get(deliver.receiver_email)
 
             if parcel and locker and sender and receiver:
-                parcel_summary[locker.locker_id][parcel.parcel_id] += 1
+                parcel_summary[parcel.parcel_id][locker.locker_id] += 1
             else:
                 logging.warning(f'Parcel {deliver.parcel_id} not available')
 

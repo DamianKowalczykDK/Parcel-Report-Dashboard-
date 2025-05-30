@@ -16,7 +16,8 @@ def converter_mock() -> MagicMock:
     return MagicMock()
 
 @pytest.fixture
-def user_data_repository(file_reader_mock, validator_mock, converter_mock) -> UserDataRepository:
+def user_data_repository(
+        file_reader_mock: MagicMock, validator_mock: MagicMock, converter_mock: MagicMock) -> UserDataRepository:
     return UserDataRepository(
         file_reader=file_reader_mock,
         validator=validator_mock,
@@ -25,7 +26,8 @@ def user_data_repository(file_reader_mock, validator_mock, converter_mock) -> Us
     )
 
 @pytest.fixture
-def locker_data_repository(file_reader_mock, validator_mock, converter_mock) -> LockerDataRepository:
+def locker_data_repository(
+        file_reader_mock: MagicMock, validator_mock: MagicMock, converter_mock: MagicMock) -> LockerDataRepository:
     return LockerDataRepository(
         file_reader=file_reader_mock,
         validator=validator_mock,
@@ -34,7 +36,8 @@ def locker_data_repository(file_reader_mock, validator_mock, converter_mock) -> 
     )
 
 @pytest.fixture
-def parcel_data_repository(file_reader_mock, validator_mock, converter_mock) -> ParcelDataRepository:
+def parcel_data_repository(
+        file_reader_mock: MagicMock, validator_mock: MagicMock, converter_mock: MagicMock) -> ParcelDataRepository:
     return ParcelDataRepository(
         file_reader=file_reader_mock,
         validator=validator_mock,
@@ -43,7 +46,8 @@ def parcel_data_repository(file_reader_mock, validator_mock, converter_mock) -> 
     )
 
 @pytest.fixture
-def deliver_data_repository(file_reader_mock, validator_mock, converter_mock) -> DeliveryDataRepository:
+def deliver_data_repository(
+        file_reader_mock: MagicMock, validator_mock: MagicMock, converter_mock: MagicMock) -> DeliveryDataRepository:
     return DeliveryDataRepository(
         file_reader=file_reader_mock,
         validator=validator_mock,

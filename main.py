@@ -44,10 +44,7 @@ def main():
 
     repository = ParcelSummaryRepository(user_repo, locker_repo, parcel_repo, delivery_repo)
     service = ParcelReportService(repository)
-    service.most_common_parcel_sizes_per_locker()
     service.city_most_shipments_by_size()
-
-
 
 
 if __name__ == "__main__":

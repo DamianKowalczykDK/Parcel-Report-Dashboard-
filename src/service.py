@@ -1,15 +1,15 @@
 from src.repository import ParcelSummaryRepository
 from collections import defaultdict
 from dataclasses import dataclass
-from src.model import Parcel
-from typing import Any
+from src.model import Parcel, CompartmentsLarge
 import logging
 
 logging.basicConfig(level=logging.INFO)
 
+
+SendAndReceivedType = dict[str, defaultdict[CompartmentsLarge, dict[str, int]]]
 NestedDefaultDict = defaultdict[str, defaultdict[str, int]]
-SentCountsType = defaultdict[Any, defaultdict[str, int]]
-ReceivedCountType = defaultdict[Any, defaultdict[str, int]]
+ResultsDict = dict[str, dict[str, str | int]]
 
 @dataclass(eq=True, frozen=False)
 class ParcelReportService:
@@ -36,13 +36,15 @@ class ParcelReportService:
         return most_common
 
 
-    def city_most_shipments_by_size(self) -> dict[str, dict[str, str]]:
+    def city_most_shipments_by_size(self) -> dict[str, dict[str, str | int]]:
         users = {u.email: u for u in self.repository.user_repo.get_data()}
         parcels = {p.parcel_id: p for p in self.repository.parcel_repo.get_data()}
         delivers = self.repository.delivery_repo.get_data()
 
-        sent_counts:  SentCountsType = defaultdict(lambda: defaultdict(int))
-        received_counts:  ReceivedCountType = defaultdict(lambda: defaultdict(int))
+        counts: SendAndReceivedType = {
+            "sent": defaultdict(lambda: defaultdict(int)),
+            "received": defaultdict(lambda: defaultdict(int)),
+        }
 
         for deliver in delivers:
             parcel = parcels.get(deliver.parcel_id)
@@ -50,44 +52,17 @@ class ParcelReportService:
             receiver = users.get(deliver.receiver_email)
             if parcel and sender and receiver:
                 size = Parcel.get_size(parcel.height, parcel.length)
-                sent_counts[size.value][sender.city] += 1
-                received_counts[size.value][receiver.city] += 1
+                counts["sent"][size][sender.city] += 1
+                counts["received"][size][receiver.city] += 1
 
-        result: dict[Any, Any] = {
+        result: ResultsDict = {
             "sent": {},
             "received": {},
         }
 
-        for size, city in sent_counts.items():
-            max_count = max(city.items(), key=lambda x: x[1])[0]
-            result["sent"][size] = max_count
-
-        for size, city in received_counts.items():
-            max_count = max(city.items(), key=lambda x: x[1])[0]
-            result["received"][size] = max_count
+        for sent_received in ["sent", "received"]:
+            for size, cities in counts[sent_received].items():
+                most_common_cities = max(cities.items(), key=lambda x: x[1])[0]
+                result[sent_received][str(size)] = most_common_cities
 
         return result
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

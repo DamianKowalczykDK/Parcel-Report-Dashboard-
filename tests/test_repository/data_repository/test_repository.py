@@ -6,7 +6,10 @@ import logging
 import pytest
 
 
-def test_get_data_empty_cache_logs_warning(user_data_repository: UserDataRepository, caplog: pytest.LogCaptureFixture) -> None:
+def test_get_data_empty_cache_logs_warning(
+        user_data_repository: UserDataRepository,
+        caplog: pytest.LogCaptureFixture) -> None:
+
     with caplog.at_level(logging.WARNING):
         data = user_data_repository.get_data()
     assert len(data) == 0
@@ -43,7 +46,12 @@ def test_no_filename_raises_value_error(
             filename=None
         )
 
-def test_no_invalid_entry_logs_error(user_data_repository: UserDataRepository,file_reader_mock, validator_mock, caplog) -> None:
+def test_no_invalid_entry_logs_error(
+        user_data_repository: UserDataRepository,
+        file_reader_mock: MagicMock,
+        validator_mock: MagicMock,
+        caplog: pytest.LogCaptureFixture ) -> None:
+
     file_reader_mock.read.return_value =[
     {
     "email": "alice.smith@gmail.com",

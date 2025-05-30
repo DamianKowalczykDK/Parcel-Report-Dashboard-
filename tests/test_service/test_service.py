@@ -1,5 +1,5 @@
-from src.model import Deliver, User, Parcel, Locker
 from tests.test_service.conftest import delivers_list, users_list, parcels_list
+from src.model import Deliver, User, Parcel, Locker
 from src.service import ParcelReportService
 from unittest.mock import MagicMock
 
@@ -18,8 +18,8 @@ def test_city_most_shipments_by_size(
     result = service.city_most_shipments_by_size()
 
     expected = {
-        'sent': {'medium': 'New York', 'small': 'Los Angeles'},
-        'received': {'medium': 'Los Angeles', 'small': 'New York'}
+        'sent': {'CompartmentsLarge.MEDIUM': 'New York', 'CompartmentsLarge.SMALL': 'Los Angeles'},
+        'received': {'CompartmentsLarge.MEDIUM': 'Los Angeles', 'CompartmentsLarge.SMALL': 'New York'}
     }
 
     assert expected == result

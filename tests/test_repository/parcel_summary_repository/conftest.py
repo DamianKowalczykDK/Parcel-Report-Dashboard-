@@ -34,6 +34,7 @@ def parcel_summary_repo(
         mock_parcel_repo: MagicMock,
         mock_deliver_repo: MagicMock
 ) -> ParcelSummaryRepository[UsersDataDict, LockersDataDict, ParcelsDataDict, DeliversDataDict]:
+
     return ParcelSummaryRepository(
         user_repo=mock_user_repo,
         locker_repo=mock_locker_repo,

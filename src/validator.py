@@ -11,9 +11,9 @@ logging.basicConfig(level=logging.INFO)
 
 class Validator[T](ABC):
     """
-    Abstract base class for data validation.
+    Abstract base class for data_json validation.
 
-    Subclasses must implement the `validate` method for their specific data type.
+    Subclasses must implement the `validate` method for their specific data_json type.
     """
     @abstractmethod
     def validate(self, data: T) -> bool: #pragma: no cover
@@ -23,10 +23,10 @@ class Validator[T](ABC):
     @staticmethod
     def has_required_keys(data: T, keys: list[str]) -> bool:
         """
-    Checks whether all required keys are present in the given data.
+    Checks whether all required keys are present in the given data_json.
 
     Args:
-        data (T): The data to validate, typically a dictionary or object.
+        data (T): The data_json to validate, typically a dictionary or object.
         keys (list[str]): A list of required key names.
 
     Returns:
@@ -89,14 +89,14 @@ class Validator[T](ABC):
 @dataclass
 class UserDataDictValidator(Validator[UsersDataDict]):
     """
-        Validator for user data (UserDataDict).
+        Validator for user data_json (UserDataDict).
         """
     required_keys: list[str] = field(default_factory=lambda:["email", "name", "surname", "city", "latitude", "longitude"])
 
     @override
     def validate(self, data: UsersDataDict) -> bool:
         """
-                Validates user data by checking required fields and email format.
+                Validates user data_json by checking required fields and email format.
                 """
         if len(self.required_keys) == 0 or not self.has_required_keys(data, self.required_keys):
             return False
@@ -105,14 +105,14 @@ class UserDataDictValidator(Validator[UsersDataDict]):
 @dataclass
 class LockerDataDictValidator(Validator[LockersDataDict]):
     """
-       Validator for locker data (LockersDataDict).
+       Validator for locker data_json (LockersDataDict).
        """
     required_keys: list[str] = field(default_factory=lambda:["locker_id", "city", "latitude", "longitude", "compartments"])
 
     @override
     def validate(self, data: LockersDataDict) -> bool:
         """
-                Validates locker data by checking structure, required fields, and if compartment values are positive integers.
+                Validates locker data_json by checking structure, required fields, and if compartment values are positive integers.
                 """
         if len(self.required_keys) == 0 or not self.has_required_keys(data, self.required_keys):
             return False
@@ -129,14 +129,14 @@ class LockerDataDictValidator(Validator[LockersDataDict]):
 @dataclass
 class ParcelDataDictValidator(Validator[ParcelsDataDict]):
     """
-        Validator for parcel data (ParcelsDataDict).
+        Validator for parcel data_json (ParcelsDataDict).
         """
     required_keys: list[str] = field(default_factory=lambda:["parcel_id", "height", "length", "weight"])
 
     @override
     def validate(self, data: ParcelsDataDict) -> bool:
         """
-                Validates parcel data by checking required fields and ensuring height, length, and weight are positive.
+                Validates parcel data_json by checking required fields and ensuring height, length, and weight are positive.
                 """
         if len(self.required_keys) == 0 or not self.has_required_keys(data, self.required_keys):
             return False
@@ -150,7 +150,7 @@ class ParcelDataDictValidator(Validator[ParcelsDataDict]):
 @dataclass
 class DeliversDataDictValidator(Validator[DeliversDataDict]):
     """
-        Validator for delivery data (DeliversDataDict).
+        Validator for delivery data_json (DeliversDataDict).
         """
 
     required_keys: list[str] = field(default_factory=lambda: [
@@ -159,11 +159,18 @@ class DeliversDataDictValidator(Validator[DeliversDataDict]):
     @override
     def validate(self, data: DeliversDataDict) -> bool:
         """
-                Validates delivery data by checking required fields, ensuring sender and receiver are different,
+                Validates delivery data_json by checking required fields, ensuring sender and receiver are different,
                 and that the delivery dates are chronologically correct.
                 """
 
         if len(self.required_keys) == 0 or not self.has_required_keys(data, self.required_keys):
+            return False
+
+        if not self.is_valid_email(data["sender_email"]):
+            logging.warning("Sender email is not valid")
+            return False
+        if not self.is_valid_email(data["receiver_email"]):
+            logging.warning("Receiver email is not valid")
             return False
 
         if data['sender_email'] == data['receiver_email']:

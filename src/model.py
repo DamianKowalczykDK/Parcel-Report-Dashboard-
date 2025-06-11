@@ -12,7 +12,7 @@ class CompartmentsLarge(Enum):
 
 class UsersDataDict(TypedDict):
     """
-        TypedDict representing the structure of user data.
+        TypedDict representing the structure of user data_json.
         """
     email: str
     name: str
@@ -23,7 +23,7 @@ class UsersDataDict(TypedDict):
 
 class LockersDataDict(TypedDict):
     """
-        TypedDict representing the structure of locker (parcel machine) data.
+        TypedDict representing the structure of locker (parcel machine) data_json.
 
         compartments: dictionary with keys as compartment sizes (str)
         and values as integer counts.
@@ -36,7 +36,7 @@ class LockersDataDict(TypedDict):
 
 class ParcelsDataDict(TypedDict):
     """
-        TypedDict representing the structure of parcel data.
+        TypedDict representing the structure of parcel data_json.
         """
     parcel_id: str
     height: int

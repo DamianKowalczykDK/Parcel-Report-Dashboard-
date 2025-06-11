@@ -1,8 +1,8 @@
 [
   {
     "parcel_id": "P12345",
-    "height": 30,
-    "length": 50,
+    "height": 20,
+    "length": 40,
     "weight": 5
   },
   {
@@ -13,8 +13,8 @@
   },
   {
     "parcel_id": "C12345",
-    "height": 20,
-    "length": 35,
+    "height": 25,
+    "length": 45,
     "weight": 1
   }
 ]

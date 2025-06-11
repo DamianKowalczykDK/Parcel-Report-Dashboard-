@@ -121,8 +121,32 @@ def test_parcel_data_dict_validator(data: ParcelsDataDict, expected: bool) -> No
     ({
         "parcel_id": "P12345",
         "locker_id": "L001",
-        "sender_email": "alice.smith@example.com",
-        "receiver_email": "john.doe@example.com",
+        "sender_email": "alice.smith@gmail.com",
+        "receiver_email": "bob.smith@gmail.com",
+        "sent_date": "2023-12-07",
+        "expected_delivery_date": "2023-12-05"
+    },False),
+    ({
+        "parcel_id": "P12345",
+        "locker_id": "L001",
+        "sender_email": "alice.smith@gmail.com",
+        "receiver_email": "alice.smith@gmail.com",
+        "sent_date": "2023-12-01",
+        "expected_delivery_date": "2023-12-05"
+    },False),
+    ({
+        "parcel_id": "P12345",
+        "locker_id": "L001",
+        "sender_email": "alice.smith@gmail.com",
+        "receiver_email": "john.doe",
+        "sent_date": "2023-12-01",
+        "expected_delivery_date": "2023-12-05"
+    },False),
+    ({
+        "parcel_id": "P12345",
+        "locker_id": "L001",
+        "sender_email": "alice.smith@gmail.com",
+        "receiver_email": "john.doe@gmail.com",
         "sent_date": "2023-12-01",
         "expected_delivery_date": "2023-12-05"
     },True),

@@ -518,5 +518,21 @@
         "receiver_email": "bcd@gmail.com",
         "sent_date": "2025-06-12",
         "expected_delivery_date": "2025-06-13"
+    },
+    {
+        "parcel_id": "1234",
+        "locker_id": "L001",
+        "sender_email": "abc@gmail.com",
+        "receiver_email": "bcd@gmail.com",
+        "sent_date": "2025-06-12",
+        "expected_delivery_date": "2025-06-13"
+    },
+    {
+        "parcel_id": "1234",
+        "locker_id": "L001",
+        "sender_email": "abc@gmail.com",
+        "receiver_email": "bcd@gmail.com",
+        "sent_date": "2025-06-12",
+        "expected_delivery_date": "2025-06-13"
     }
 ]

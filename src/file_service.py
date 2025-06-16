@@ -1,4 +1,4 @@
-from src.model import User, Parcel, Locker, Deliver
+from src.model import User, Parcel, Locker, Deliver, UsersDataDict, LockersDataDict, ParcelsDataDict, DeliversDataDict
 import json
 
 class FileReader[T]:

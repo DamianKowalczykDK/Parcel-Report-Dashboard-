@@ -15,7 +15,6 @@ pyright = "*"
 pytest = "*"
 pytest-cov = "*"
 
-
 [requires]
 python_version = "3.13"
 python_full_version = "3.13.2"

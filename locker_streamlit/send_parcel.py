@@ -58,7 +58,7 @@ def send(file_path: str) -> DeliversDataDict | None:
 
         try:
             DeliverWriterJson.write(file_path, existing_data)
-            st.success("Data successfully written to file")
+            st.success("Your package has been shipped")
             st.json(new_delivery)
             return new_delivery
 

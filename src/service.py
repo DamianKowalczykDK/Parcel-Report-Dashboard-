@@ -77,7 +77,7 @@ class ParcelReportService:
         for sent_received in ["sent", "received"]:
             for size, cities in counts[sent_received].items():
                 most_common_cities = max(cities.items(), key=lambda x: x[1])[0]
-                result[sent_received][str(size)] = most_common_cities
+                result[sent_received][size.value] = most_common_cities
 
         return result
 

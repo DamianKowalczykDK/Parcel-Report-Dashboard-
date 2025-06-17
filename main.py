@@ -47,7 +47,7 @@ def main():
     service = ParcelReportService(repository)
     service.city_most_shipments_by_size()
     service.is_parcel_limit_in_locker_exceeded()
-    print(service.max_days_between_sent_and_expected())
+    service.max_days_between_sent_and_expected()
 
 if __name__ == "__main__":
     main()

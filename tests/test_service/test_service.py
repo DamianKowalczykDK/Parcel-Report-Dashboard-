@@ -21,8 +21,8 @@ def test_city_most_shipments_by_size(
     result = service.city_most_shipments_by_size()
 
     expected = {
-        'sent': {'CompartmentsLarge.MEDIUM': 'New York', 'CompartmentsLarge.SMALL': 'Los Angeles'},
-        'received': {'CompartmentsLarge.MEDIUM': 'Los Angeles', 'CompartmentsLarge.SMALL': 'New York'}
+        'sent': {'medium': 'New York', 'small': 'Los Angeles'},
+        'received': {'medium': 'Los Angeles', 'small': 'New York'}
     }
 
     assert expected == result

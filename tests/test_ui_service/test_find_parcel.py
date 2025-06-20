@@ -12,19 +12,11 @@ def test_ui_service_if_not_find_parcel(
         mock_st: MagicMock,
         mock_load: MagicMock,
         mock_open: MagicMock,
+        deliver_3_data: DeliversDataDict,
         mock_ui_service: UiService) -> None:
 
     mock_open.return_value.__enter__.return_value = MagicMock()
-    mock_load.return_value = [
-        {
-            "parcel_id": "P12345",
-            "locker_id": "L001",
-            "sender_email": "alice.smith@gmail.com",
-            "receiver_email": "john.doe@gmail.com",
-            "sent_date": "2025-01-01",
-            "expected_delivery_date": "2025-01-07"
-        }
-    ]
+    mock_load.return_value = [deliver_3_data]
 
     mock_st.text_input.return_value = "P123"
     mock_ui_service._find_parcel("fake_path.json")

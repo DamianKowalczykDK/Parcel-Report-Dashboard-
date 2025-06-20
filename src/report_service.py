@@ -1,7 +1,7 @@
-from dataclasses import dataclass
-from pandas import DataFrame
 from src.service import ParcelReportService
 from src.model import CompartmentsLarge
+from dataclasses import dataclass
+from pandas import DataFrame
 import pandas as pd
 
 @dataclass

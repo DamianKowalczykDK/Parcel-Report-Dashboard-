@@ -1,11 +1,10 @@
-import pytest
-
-from tests.conftest import parcel_1
 from tests.test_service.conftest import delivers_list, users_list, parcels_list
 from src.model import Deliver, User, Parcel, Locker, CompartmentsLarge
 from src.service import ParcelReportService
 from unittest.mock import MagicMock
+from tests.conftest import parcel_1
 import logging
+import pytest
 
 def test_city_most_shipments_by_size(
         service: ParcelReportService,

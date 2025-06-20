@@ -11,9 +11,25 @@ from src.model import (
     ParcelsDataDict,
     DeliversDataDict
 )
+from src.report_service import ReportService
+from src.ui_service import UiService
+from src.validator import DeliversDataDictValidator
+
 
 def fake_user() -> MagicMock:
     return MagicMock(spec=User)
+
+@pytest.fixture
+def mock_service() -> MagicMock:
+    return MagicMock()
+
+@pytest.fixture
+def mock_report_service(mock_service: MagicMock) -> ReportService:
+    return ReportService(service=mock_service)
+
+@pytest.fixture
+def mock_ui_service(mock_report_service: MagicMock) -> UiService:
+    return UiService(report_service=mock_report_service, validator=DeliversDataDictValidator())
 
 @pytest.fixture
 def user_1() -> User:
@@ -175,6 +191,28 @@ def deliver_2_data() -> DeliversDataDict:
         "locker_id": "L002",
         "sender_email": "jane.smith@example.com",
         "receiver_email": "john.doe@example.com",
+        "sent_date": "2023-12-02",
+        "expected_delivery_date": "2023-12-06"
+    }
+
+@pytest.fixture()
+def deliver_3() -> Deliver:
+    return Deliver(
+        parcel_id="P67890",
+        locker_id="L002",
+        sender_email="jane.smith@gmail.com",
+        receiver_email="john.doe@gmail.com",
+        sent_date="2023-12-02",
+        expected_delivery_date="2023-12-06"
+    )
+
+@pytest.fixture()
+def deliver_3_data() -> DeliversDataDict:
+    return {
+        "parcel_id": "P67890",
+        "locker_id": "L002",
+        "sender_email": "jane.smith@gmail.com",
+        "receiver_email": "john.doe@gmail.com",
         "sent_date": "2023-12-02",
         "expected_delivery_date": "2023-12-06"
     }

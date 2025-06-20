@@ -5,8 +5,7 @@ class FileReader[T]:
     """
     Generic file reader class for reading JSON data_json into a list of type T.
     """
-    @staticmethod
-    def read(file_name: str) -> list[T]:
+    def read(self, file_name: str) -> list[T]:
         """
         Reads JSON data_json from a file and returns it as a list of objects of type T.
 
@@ -47,8 +46,8 @@ class FileWriter[T]:
     """
     Generic file writer class for writing a list of objects of type T to a JSON file.
     """
-    @staticmethod
-    def write(file_name: str, data: list[T]) -> None:
+
+    def write(self, file_name: str, data: list[T]) -> None:
         """
         Writes a list of objects to a JSON file.
 

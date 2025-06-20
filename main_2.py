@@ -1,9 +1,5 @@
-from typing import cast
-
-import streamlit as st
-
-from locker_streamlit import find_parcel
-from locker_streamlit import send_parcel, report
+from src.report_service import ReportService
+from src.ui_service import UiService
 from src.converter import (
     UserConverter, LockerConverter, ParcelConverter, DeliverConverter
 )
@@ -20,10 +16,10 @@ from src.validator import (
     UserDataDictValidator, LockerDataDictValidator,
     ParcelDataDictValidator, DeliversDataDictValidator
 )
+from typing import cast
 
 
 def main_2() -> None:
-
 
     user_repo = UserDataRepository(
         file_reader= cast(FileReader[UsersDataDict], UserReaderJson()),
@@ -52,25 +48,10 @@ def main_2() -> None:
 
     repository = ParcelSummaryRepository(user_repo, locker_repo, parcel_repo, delivery_repo)
     service = ParcelReportService(repository)
-    st.title("Automated Parcel Delivery Monitor 📦")
-    st.sidebar.title("Menu")
-    page = st.sidebar.radio("Select", ["Send Order", "Track your shipment", "Report"])
+    service_report = ReportService(service)
+    service_ui = UiService(service_report)
 
-    match page:
-        case "Send Order":
-            send_parcel.send("data_json/delivers.json")
-        case "Track your shipment":
-            find_parcel.find("data_json/delivers.json")
-        case "Report":
-            st.subheader("Reports")
-            if st.button("📊 Most Common Parcel Sizes per Locker"):
-                report.report_most_common_parcel_sizes_per_locker(service=service)
-            if st.button('📊 City Most Shipments by Size'):
-                report.report_city_most_shipments_by_size(service=service)
-            if st.button("📊 Max days between sent and expected date"):
-                report.report_max_days_between_sent_and_expected(service=service)
-            if st.button("📊 is parcel limit in locker exceeded"):
-                report.report_is_parcel_limit_in_locker_exceeded(service=service)
+    service_ui.show_ui()
 
 
 if __name__ == "__main__":

@@ -45,7 +45,7 @@ def main():
 
     repository = ParcelSummaryRepository(user_repo, locker_repo, parcel_repo, delivery_repo)
     service = ParcelReportService(repository)
-    service.city_most_shipments_by_size()
+    print(service.city_most_shipments_by_size())
     service.is_parcel_limit_in_locker_exceeded()
     service.max_days_between_sent_and_expected()
 

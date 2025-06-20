@@ -6,35 +6,37 @@ A Python-based system for managing parcels, deliveries, users, and parcel locker
 
 📁 Project Structure
 `````
-locker_streamlit/ 
-├── send_parcel.py
 src/
-├── model.py
-├── validator.py
 ├── converter.py 
+├── file_service.py
+├── model.py
+├── report_service.py
 ├── repository.py
 ├── service.py
-├── file_service.py
+├── ui_service.py
+├── validator.py
 tests/
 ├── test_file_service/
-│ ├── conftest.py
-│ └── test_file_service.py
-├── test_locker_streamlit/
-│ ├── conftest.py
-│ └── test_send_parcel.py
+│   ├── conftest.py
+│   └── test_file_service.py
 ├── test_repository/
-├── data_repository/
-│   ├── conftest.py
-│   └── test_data_repository.py
-├── parcel_summary_repository/
-│   ├── conftest.py
-│   └── test_parcel_summary_repository.py
+│   └── data_repository/
+│       ├── conftest.py
+│       └── test_repository.py
+│   ├── parcel_summary_repository/
+│       ├── conftest.py
+│       └── test_parcel_summary_repository.py
 ├── test_service/
 │   ├── conftest.py
 │   └── test_service.py
+├── test_ui_service/
+│   ├── test_find_parcel.py
+│   ├── test_send_parcel.py
+│   └── test_show_ui.py
 ├── conftest.py
 ├── test_converter.py
 ├── test_model.py
+├── test_report_service.py
 ├── test_validator.py
 
 Pipfile / Pipfile.lock # Project dependencies
@@ -54,6 +56,7 @@ ___
 After activating the environment, run the Streamlit app:
 
 streamlit run main_2.py
+
 The app will open in your browser (usually at: http://localhost:8501).
 Use the interface to view reports, parcel statistics, and visual summaries generated from the data.
 
@@ -84,7 +87,7 @@ pipenv run test
 To check test coverage:
 
 - pipenv run check     # runs pyright
-- pipenv run check2    # runs mypy on src, locker_streamlit, tests, main.py, main1.py
+- pipenv run check2    # runs mypy on src, tests, main.py, main_2.py
 - pipenv run test      # runs pytest with coverage reports
 
 
